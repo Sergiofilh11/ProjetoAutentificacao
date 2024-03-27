@@ -1,5 +1,6 @@
 package com.example.projetoautentificacao
 
+import android.app.Activity
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -19,6 +20,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.projetoautentificacao.ui.theme.ProjetoAutentificacaoTheme
@@ -57,7 +59,10 @@ fun Form() {
             Text(
                 modifier = Modifier.width(64.dp),
                 text = "Senha")
-            TextField(value = "123456", onValueChange = {})
+            TextField(
+                value = "123456",
+                visualTransformation = PasswordVisualTransformation(),
+                onValueChange = {})
         }
 
         Row(
@@ -66,7 +71,10 @@ fun Form() {
         ) {
             Button(onClick = {
                 // Login no backend
-                (context as FormActivity).finish()
+                with(context as FormActivity) {
+                    setResult(Activity.RESULT_OK)
+                    finish()
+                }
             }) {
                 Text(text = "Confirmar")
             }
